@@ -5,8 +5,8 @@ then
 echo "Skip installation."
 else
 
-wget $phpzip_url /opt/app-root/src/
-unzip /opt/app-root/src/latest.zip
+wget -q $phpzip_url /opt/app-root/src/
+unzip -q /opt/app-root/src/latest.zip
 
 echo "Clear files"
 rm -r httpd-pre-init
@@ -30,3 +30,5 @@ sed -i $'s/\'DB_HOST\'\, \'localhost\'/\'DB_HOST\', \'mysql\'/g' wp-config.php
 # sed -i $'/\(\'NONCE_SALT\'/c define\(\'NONCE_SALT\'\, $_ENV[\"WP_NS\"]\)\;' wp-config.php
 
 fi
+
+echo "Installation finished."
