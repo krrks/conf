@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f "./index.php" || -z $phpzip_url  ]
+if [ -f "./index.php" ] || [ -z $phpzip_url  ]
 then
 echo "=> [$(date +%F' '%T)] Skip installation."
 else
@@ -12,6 +12,7 @@ echo "=> [$(date +%F' '%T)] Waiting persisten volume."
 while [ ! -f ./wp-content/pvc.txt ]
 do
   touch ./wp-content/pvc.txt
+  touch ./wp-content/a.txt
   sleep 3
   echo "-> [$(date +%F' '%T)] Waiting 3s."
 done
