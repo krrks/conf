@@ -8,16 +8,32 @@ else
 echo "=> [$(date +%F' '%T)] Fetching php zip file."
 wget -q -O srcfl.zip $phpzip_url 
 
-echo "=> [$(date +%F' '%T)] Unzip src.zip"
-unzip -q srcfl.zip
+echo "=> [$(date +%F' '%T)] Waiting persisten volume."
+while [ ! -f ./wp-content/pvc.txt ]
+do
+  touch ./wp-content/pvc.txt
+  sleep 3
+  echo "-> [$(date +%F' '%T)] Waiting 3s."
+done
+while [ ! -f ./wp-includes/pvc.txt ]
+do
+  touch ./wp-includes/pvc.txt
+  sleep 3
+  echo "-> [$(date +%F' '%T)] Waiting 3s."
+done
+rm ./wp-content/pvc.txt ./wp-includes/pvc.txt
 
-echo "=> [$(date +%F' '%T)] Clear files"
+
+echo "=> [$(date +%F' '%T)] Unzip src.zip."
+unzip -q -n srcfl.zip
+
+echo "=> [$(date +%F' '%T)] Clear files."
 rm -r httpd-pre-init
 rm -r php-pre-start
 rm srcfl.zip 
 mv ./wordpress/* ./
 rm -r wordpress
-echo "=> [$(date +%F' '%T)] Setting wp-config"
+echo "=> [$(date +%F' '%T)] Setting wp-config."
 cp wp-config-sample.php wp-config.php
 sed -i $'s/\'database_name_here\'/$_ENV[\"database_name\"]/g' wp-config.php
 sed -i $'s/\'username_here\'/$_ENV[\"database_user\"]/g' wp-config.php
