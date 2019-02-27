@@ -5,8 +5,11 @@ then
 echo "Skip installation."
 else
 
-wget -q $phpzip_url /opt/app-root/src/
-unzip -q /opt/app-root/src/latest.zip
+echo "Fetching php zip file."
+wget -q -O src.zip $phpzip_url 
+
+echo "Unzip src.zip"
+unzip -q src.zip
 
 echo "Clear files"
 rm -r httpd-pre-init
