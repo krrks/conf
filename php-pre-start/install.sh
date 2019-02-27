@@ -6,15 +6,15 @@ echo "Skip installation."
 else
 
 echo "Fetching php zip file."
-wget -q -O src.zip $phpzip_url 
+wget -q -O srcfl.zip $phpzip_url 
 
 echo "Unzip src.zip"
-unzip -q src.zip
+unzip -q srcfl.zip
 
 echo "Clear files"
 rm -r httpd-pre-init
 rm -r php-pre-start
-rm latest.zip 
+rm srcfl.zip 
 mv ./wordpress/* ./
 rm -r wordpress
 echo "Setting wp-config"
