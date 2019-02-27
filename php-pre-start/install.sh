@@ -2,22 +2,22 @@
 
 if [ -f "./index.php" ]
 then
-echo "Skip installation."
+echo "=>$(date +%F' '%T) Skip installation."
 else
 
-echo "Fetching php zip file."
+echo "=>$(date +%F' '%T) Fetching php zip file."
 wget -q -O srcfl.zip $phpzip_url 
 
-echo "Unzip src.zip"
+echo "=>$(date +%F' '%T) Unzip src.zip"
 unzip -q srcfl.zip
 
-echo "Clear files"
+echo "=>$(date +%F' '%T) Clear files"
 rm -r httpd-pre-init
 rm -r php-pre-start
 rm srcfl.zip 
 mv ./wordpress/* ./
 rm -r wordpress
-echo "Setting wp-config"
+echo "=>$(date +%F' '%T) Setting wp-config"
 cp wp-config-sample.php wp-config.php
 sed -i $'s/\'database_name_here\'/$_ENV[\"database_name\"]/g' wp-config.php
 sed -i $'s/\'username_here\'/$_ENV[\"database_user\"]/g' wp-config.php
@@ -34,4 +34,4 @@ sed -i $'s/\'DB_HOST\'\, \'localhost\'/\'DB_HOST\', \'mysql\'/g' wp-config.php
 
 fi
 
-echo "Installation finished."
+echo "=>$(date +%F' '%T) Installation finished."
