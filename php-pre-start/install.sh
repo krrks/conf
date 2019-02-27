@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f "./index.php" ]
+if [ -f "./index.php" || -z $phpzip_url  ]
 then
 echo "=> [$(date +%F' '%T)] Skip installation."
 else
