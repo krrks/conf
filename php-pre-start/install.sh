@@ -8,21 +8,20 @@ else
 echo "=> [$(date +%F' '%T)] Fetching php zip file."
 wget -q -O srcfl.zip $phpzip_url 
 
-echo "=> [$(date +%F' '%T)] Waiting persisten volume."
-while [ ! -f ./wp-content/pvc.txt ]
-do
-  touch ./wp-content/pvc.txt
-  touch ./wp-content/a.txt
-  sleep 3
-  echo "-> [$(date +%F' '%T)] Waiting 3s."
-done
-while [ ! -f ./wp-includes/pvc.txt ]
-do
-  touch ./wp-includes/pvc.txt
-  sleep 3
-  echo "-> [$(date +%F' '%T)] Waiting 3s."
-done
-rm ./wp-content/pvc.txt ./wp-includes/pvc.txt
+# echo "=> [$(date +%F' '%T)] Waiting persisten volume."
+# while [ ! -f ./wp-content/pvc.txt ]
+# do
+#   touch ./wp-content/pvc.txt
+#   sleep 3
+#   echo "-> [$(date +%F' '%T)] Waiting 3s."
+# done
+# while [ ! -f ./wp-includes/pvc.txt ]
+# do
+#   touch ./wp-includes/pvc.txt
+#   sleep 3
+#   echo "-> [$(date +%F' '%T)] Waiting 3s."
+# done
+# rm ./wp-content/pvc.txt ./wp-includes/pvc.txt
 
 
 echo "=> [$(date +%F' '%T)] Unzip src.zip."
@@ -32,7 +31,7 @@ echo "=> [$(date +%F' '%T)] Clear files."
 rm -r httpd-pre-init
 rm -r php-pre-start
 rm srcfl.zip 
-mv ./wordpress/* ./
+cp -rn ./wordpress/* ./
 rm -r wordpress
 echo "=> [$(date +%F' '%T)] Setting wp-config."
 cp wp-config-sample.php wp-config.php
