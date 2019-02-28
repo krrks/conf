@@ -31,9 +31,10 @@ echo "=> [$(date +%F' '%T)] Clear files."
 rm -r httpd-pre-init
 rm -r php-pre-start
 rm srcfl.zip 
-cp -rn ./wordpress/* ./
-rm -r wordpress
+# cp -rn ./wordpress/* ./
+# rm -r wordpress
 echo "=> [$(date +%F' '%T)] Setting wp-config."
+cd wordpress
 cp wp-config-sample.php wp-config.php
 sed -i $'s/\'database_name_here\'/$_ENV[\"database_name\"]/g' wp-config.php
 sed -i $'s/\'username_here\'/$_ENV[\"database_user\"]/g' wp-config.php
