@@ -49,6 +49,7 @@ sed -i $'s/\'DB_HOST\'\, \'localhost\'/\'DB_HOST\', \'mysql\'/g' wp-config.php
 # sed -i $'/\(\'LOGGED_IN_SALT\'/c define\(\'LOGGED_IN_SALT\'\, $_ENV[\"WP_LIS\"]\)\;' wp-config.php
 # sed -i $'/\(\'NONCE_SALT\'/c define\(\'NONCE_SALT\'\, $_ENV[\"WP_NS\"]\)\;' wp-config.php
 
+echo "---> [$(date +%F' '%T)] Installation finished."
 fi
 
-echo "---> [$(date +%F' '%T)] Installation finished."
+
